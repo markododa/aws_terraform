@@ -1,0 +1,3 @@
+variable "subnet" {}
+variable "sec_group" {}
+variable "vpc" {}
