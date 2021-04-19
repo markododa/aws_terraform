@@ -1,6 +1,7 @@
-resource "aws_security_group" "test_sec_group" {
-  name        = "test_sec_group"
-  description = "test sec group"
+resource "aws_security_group" "fortune_sec_group" {
+  name        = "fortune-sec-group"
+  description = "fortune sec group"
+  vpc_id  = aws_vpc.fortune_vpc.id
 
   ingress {
     description = "ssh"
@@ -30,9 +31,10 @@ resource "aws_security_group" "test_sec_group" {
   }
 }
 
-resource "aws_security_group" "lb_sec_group" {
-  name        = "lb_sec_group"
-  description = "lb_sec_group"
+resource "aws_security_group" "fortune_lb_sec_group" {
+  name        = "fortune_lb_sec_group"
+  description = "fortune_lb_sec_group"
+  vpc_id  = aws_vpc.fortune_vpc.id
 
   ingress {
     description = "http"

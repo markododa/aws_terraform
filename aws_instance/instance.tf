@@ -1,12 +1,14 @@
-resource "aws_instance" "test-[index.count]" {
+resource "aws_instance" "fortune-instance" {
   ami           = data.aws_ami.debian.id
   instance_type = "t2.micro"
   key_name = "user"
-  security_groups = [var.sec_groups.name]
+  associate_public_ip_address = true
+  subnet_id = var.subnet
+  vpc_security_group_ids  = [var.sec_group]
   count = 2
 
   tags = {
-    Name = "test"
+    Name = "fortune-instance-${count.index}"
   }
 
   provisioner "file" {
@@ -39,9 +41,9 @@ resource "aws_instance" "test-[index.count]" {
   }
 }
 
-resource "aws_lb_target_group_attachment" "test" {
+resource "aws_lb_target_group_attachment" "fortune_target_group" {
   target_group_arn = var.target_group_arn
-  target_id        = aws_instance.test[count.index].id
+  target_id        = aws_instance.fortune-instance[count.index].id
   port             = 5000
   count=2
 }
