@@ -1,2 +1,2 @@
 # aws_terraform
-Study repo for terraform.
+Study repo for aws with terraform.
